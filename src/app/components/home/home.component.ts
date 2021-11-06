@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { IRecipe } from '../../models/forkify.model';
 import { ForkifyService } from '../../services/forkify.service';
 
@@ -11,6 +11,7 @@ import { ForkifyService } from '../../services/forkify.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   recipes: IRecipe[] = [];
+  count = 0;
   destroy$ = new Subject();
 
   constructor(private forkifyService: ForkifyService) { }
@@ -19,18 +20,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   searchDish(query: string) {
-    console.log('dish name', query);
-
     this.forkifyService.search(query)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(
-      res => {
-        console.log('dishes', res);
-        this.recipes = res.recipes;
-      },
-      err => console.log('error in search', err),
-      () => console.log('search completed')
-    );
+    .pipe(
+      takeUntil(this.destroy$),
+      tap(response => {
+        this.count = response.count;
+        console.log('recipes count:', this.count);
+      }),
+      map(response => response.recipes),
+    )
+    .subscribe(recipesRes => {
+      this.recipes = recipesRes;
+    });
   }
 
   ngOnDestroy() {

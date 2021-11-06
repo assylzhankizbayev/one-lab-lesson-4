@@ -3,8 +3,14 @@
     <app-header (search)="searchDish($event)"></app-header>
 
     <div class="main">
-      <app-sidebar class="main__sidebar" [recipes]="recipes"></app-sidebar>
-      <app-details class="main__details"></app-details>
+      <ng-container *ngIf="recipes?.length else emptyTemp">
+        <app-sidebar class="main__sidebar" [recipes]="recipes"></app-sidebar>
+        <app-details class="main__details"></app-details>
+      </ng-container>
+
+      <ng-template #emptyTemp>
+        Empty list
+      </ng-template>
     </div>
   </div>
 </div>

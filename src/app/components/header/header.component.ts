@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -21,10 +21,11 @@ export class HeaderComponent extends BaseComponent implements OnInit {
       .pipe(
         takeUntil(this.destroy$),
         debounceTime(700),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        tap(query => {
+          this.search.emit(query);
+        })
       )
-      .subscribe(query => {
-        this.search.emit(query);
-      });
+      .subscribe();
   }
 }
