@@ -1,0 +1,10 @@
+<div class="home">
+  <div class="container">
+    <app-header (search)="searchDish($event)"></app-header>
+
+    <div class="main">
+      <app-sidebar class="main__sidebar" [recipes]="recipes"></app-sidebar>
+      <app-details class="main__details"></app-details>
+    </div>
+  </div>
+</div>

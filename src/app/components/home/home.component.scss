@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  flex-direction: row;
+
+  &__sidebar {
+    flex-grow: 0;
+    flex-basis: 300px;
+  }
+
+  &__details {
+    flex-grow: 1;
+  }
+}
