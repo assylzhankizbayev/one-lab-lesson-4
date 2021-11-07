@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IRecipes } from '../models/forkify.model';
+import { IDetailsRes, IRecipes } from '../models/forkify.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +19,9 @@ export class ForkifyService {
     return this.http.get<IRecipes>(this.url + '/search', { params });
   }
 
-  details(rId: string): Observable<any> {
+  getDetails(rId: string): Observable<IDetailsRes> {
     const params = new HttpParams().set('rId', rId);
 
-    return this.http.get<any>(this.url + '/get', { params })
+    return this.http.get<IDetailsRes>(this.url + '/get', { params })
   }
 }

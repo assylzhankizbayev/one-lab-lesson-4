@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IRecipe } from '../../models/forkify.model';
 
 @Component({
@@ -6,12 +6,11 @@ import { IRecipe } from '../../models/forkify.model';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   @Input() recipes: IRecipe[] = [];
+  @Output() getId = new EventEmitter<string>();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  getDishId(id: string) {
+    this.getId.emit(id);
   }
-
 }

@@ -1,1 +1,15 @@
-<p>details works!</p>
+<div class="details">
+  <ng-container *ngIf="recipe else emptyTemp">
+    <h2 class="details__title">{{ recipe.title }}</h2>
+
+    <img [src]="recipe?.image_url" alt="{{ recipe.title }}">
+
+    <ul>
+      <li *ngFor="let ingredient of recipe?.ingredients">{{ ingredient }}</li>
+    </ul>
+  </ng-container>
+
+  <ng-template #emptyTemp>
+    Empty list
+  </ng-template>
+</div>

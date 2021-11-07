@@ -1,5 +1,9 @@
 <div class="recipes">
-  <div class="recipes__item" *ngFor="let recipe of recipes">
+  <div
+    class="recipes__item"
+    *ngFor="let recipe of recipes"
+    (click)="getDishId(recipe.recipe_id)"
+  >
     {{ recipe.title }}
   </div>
 </div>
