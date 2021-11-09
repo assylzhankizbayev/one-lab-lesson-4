@@ -2,7 +2,9 @@
   <ng-container *ngIf="recipe else emptyTemp">
     <h2 class="details__title">{{ recipe.title }}</h2>
 
-    <img [src]="recipe?.image_url" alt="{{ recipe.title }}">
+    <img class="details__img" [src]="recipe?.image_url" alt="{{ recipe.title }}">
+
+    <h4 class="details__ingredients">Ingredients</h4>
 
     <ul>
       <li *ngFor="let ingredient of recipe?.ingredients">{{ ingredient }}</li>
@@ -10,6 +12,11 @@
   </ng-container>
 
   <ng-template #emptyTemp>
-    Empty list
+    <div class="pizza-logo">
+      <img class="pizza-img" src="assets/pizza-logo.jpg" alt="">
+    </div>
   </ng-template>
 </div>
+
+
+{{ filteredIngredients$ | async }}

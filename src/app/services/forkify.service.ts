@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IDetailsRes, IRecipes } from '../models/forkify.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ForkifyService {
-  url = 'https://forkify-api.herokuapp.com/api';
+  private count = new BehaviorSubject<number>(2);
+  private url = 'https://forkify-api.herokuapp.com/api';
 
   constructor(
     private http: HttpClient
   ) {}
+
+  get count$() {
+    return this.count.asObservable();
+  }
 
   search(q: string): Observable<IRecipes> {
     const params = new HttpParams().set('q', q);
@@ -23,5 +28,9 @@ export class ForkifyService {
     const params = new HttpParams().set('rId', rId);
 
     return this.http.get<IDetailsRes>(this.url + '/get', { params })
+  }
+
+  setCount(count: number) {
+    this.count.next(count);
   }
 }

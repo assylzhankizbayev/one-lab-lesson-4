@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 import { IRecipe, IRecipeDetails } from '../../models/forkify.model';
 import { ForkifyService } from '../../services/forkify.service';
 
@@ -26,13 +26,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       tap(response => {
         this.count = response.count;
-        console.log('recipes count:', this.count);
-      }),
-      map(response => response.recipes),
+        this.recipes = response.recipes;
+      })
     )
-    .subscribe(recipesRes => {
-      this.recipes = recipesRes;
-    });
+    .subscribe();
   }
 
   getDishDetails(id: string) {

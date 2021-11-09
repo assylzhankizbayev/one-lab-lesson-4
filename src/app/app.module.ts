@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DetailsComponent } from './components/details/details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CounterComponent } from './components/counter/counter.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
     FooterComponent,
     SidebarComponent,
     DetailsComponent,
+    CounterComponent,
   ],
   imports: [
     BrowserModule,

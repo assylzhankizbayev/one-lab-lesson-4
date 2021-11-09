@@ -10,13 +10,15 @@ import { BaseComponent } from '../base.component';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
-  queryControl = new FormControl();
+  queryControl = new FormControl(null);
 
   constructor() {
     super();
   }
 
   ngOnInit(): void {
+    this.search.emit('Pizza');
+
     this.queryControl.valueChanges
       .pipe(
         takeUntil(this.destroy$),

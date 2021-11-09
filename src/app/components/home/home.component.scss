@@ -4,11 +4,11 @@
 
   &__sidebar {
     flex-grow: 0;
-    flex-basis: 300px;
+    width: 300px;
   }
 
   &__details {
-    background-color: #ddd;
-    flex-grow: 1;
+    flex: 1;
+    display: flex;
   }
 }

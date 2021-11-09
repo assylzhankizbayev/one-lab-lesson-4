@@ -1,0 +1,32 @@
+:host {
+  background-color: #fff;
+}
+
+.details {
+  padding: 16px;
+  width: 100%;
+
+  &__title {
+    margin: 0 0 24px;
+  }
+
+  &__img {
+    box-shadow: 4px 4px 0 #dedede;
+    border-radius: 16px 0 16px 0;
+    max-height: 450px;
+  }
+
+  &__ingredients {
+    margin: 24px 0 16px;
+  }
+}
+
+.pizza-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pizza-img {
+  max-width: 500px;
+}
