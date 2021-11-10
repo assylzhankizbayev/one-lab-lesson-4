@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
+import { interval, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, takeUntil, tap } from 'rxjs/operators';
 import { BaseComponent } from '../base.component';
 
 @Component({
@@ -10,6 +11,9 @@ import { BaseComponent } from '../base.component';
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
+  time$: Observable<Date> = interval(1000).pipe(
+    map(() => new Date()),
+  );
   queryControl = new FormControl(null);
 
   constructor() {
@@ -21,13 +25,13 @@ export class HeaderComponent extends BaseComponent implements OnInit {
 
     this.queryControl.valueChanges
       .pipe(
-        takeUntil(this.destroy$),
         debounceTime(700),
         distinctUntilChanged(),
         tap(query => {
           this.search.emit(query);
         })
       )
+      .pipe(takeUntil(this.destroy$))
       .subscribe();
   }
 }

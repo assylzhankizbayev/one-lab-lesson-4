@@ -1,6 +1,9 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand">Forkify Cantine</a>
+
+    <span>{{ (time$ | async) | date: 'medium' }}</span>
+
     <form class="d-flex">
       <input
         class="form-control me-2"
